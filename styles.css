@@ -1,0 +1,129 @@
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* General setting */
+div[class^="container"] {
+  max-width: 1120px;
+}
+
+/* Link */
+a.link--black {
+  color: #000 !important;
+}
+
+a.link--black:hover {
+  color: #666 !important;
+}
+
+a.link--white {
+  color: #fff !important;
+}
+
+a.link--white:hover {
+  color: #ddd !important;
+}
+
+/* News carousel */
+#carousel-news {
+  box-shadow: 0 0 3px #000;
+}
+
+.carousel-item {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)),
+    url("./images/loading-img.jpg");
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: cover !important;
+  height: 90vh;
+}
+
+.carousel-caption p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+  text-align: justify;
+}
+
+/* News area */
+#news-area h3,
+#sidebar-area h3 {
+  display: inline-block;
+  line-height: 1.5;
+  border-bottom: 5px solid #dc3545;
+}
+
+/* News item */
+.news-item {
+  position: relative;
+}
+
+.news-item__img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  box-shadow: 0 0 3px #000;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: cover !important;
+}
+
+.news-item__info {
+  position: absolute;
+  transform: translateY(-100%);
+}
+
+.news-item__description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-align: justify;
+}
+
+/* Pagination */
+.pagination .page-link {
+  color: #dc3545 !important;
+  border: 1px solid #dc3545 !important;
+}
+
+.pagination .page-link.active {
+  color: #fff !important;
+  background-color: #dc3545 !important;
+}
+
+.pagination .page-link.active:hover {
+  background-color: #ba1323 !important;
+}
+
+/* Sidebar */
+#category-list a,
+#language-list a {
+  color: #fff !important;
+  padding: 0.5rem;
+  display: inline-block;
+  border: 1px solid #fff;
+}
+
+#category-list a:hover,
+#language-list a:hover {
+  color: #ddd !important;
+  border: 1px solid #ddd;
+}
