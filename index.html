@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>News reading app</title>
+    <title>OldNews</title>
 
     <!-- Styles -->
     <link href="./styles.css" rel="stylesheet" />
@@ -122,12 +122,18 @@
       <!-- Header end -->
     </header>
 
+    <div id="loading-overlay" class="d-none">
+      <div class="spinner-border text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
     <!-- Main tag start -->
     <main class="site-main">
       <!-- Carousel section start -->
       <section>
         <div class="container">
-          <div id="alertPlaceholder"></div>
+          <div id="alert-placeholder"></div>
           <div
             id="carousel-news"
             class="carousel slide mt-2"
@@ -178,13 +184,15 @@
         <!-- Carousel section end -->
       </section>
 
+      <div id="news-area-scroll"></div>
+
       <!-- News section start -->
       <section class="mt-5">
         <div class="container">
           <div class="row">
             <!-- Main news area start -->
             <div class="col-md-8" id="news-area">
-              <h3>Latest headlines</h3>
+              <h3 class="section-title">Loading . . .</h3>
               <div class="news-item-list"></div>
               <nav id="news-pagination" class="mt-5">
                 <ul class="pagination justify-content-center"></ul>
@@ -194,8 +202,8 @@
             <!-- Sidebar news area start -->
             <div class="col-md-4" id="sidebar-area">
               <!-- Search news start -->
-              <div id="search-field" class="mt-5 mt-lg-0">
-                <h3>Search news</h3>
+              <div id="search-field" class="mt-5 mt-md-0">
+                <h3 class="section-title">Search news</h3>
                 <form class="d-flex mt-4" role="search">
                   <input
                     class="form-control me-2 rounded-0"
@@ -231,7 +239,7 @@
               </div>
               <!-- Language list start -->
               <div id="language-list" class="mt-5">
-                <h3>Languages</h3>
+                <h3 class="section-title">Languages</h3>
                 <ul class="bg-danger mt-4 p-4 d-flex flex-wrap gap-3">
                   <li><a href="#">Afrikaans - AF</a></li>
                   <li><a href="#">Arabic - AR</a></li>
@@ -366,8 +374,8 @@
     <!-- Script -->
     <script src="./scripts/pagination.js"></script>
     <script src="./scripts/storage.js"></script>
-    <script src="./scripts/format.js"></script>
     <script src="./scripts/alert.js"></script>
+    <script src="./scripts/tool.js"></script>
     <script src="./index.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"

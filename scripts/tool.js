@@ -12,3 +12,8 @@ const ddmmyyyy = (str) => {
 
   return [(dd > 9 ? "" : "0") + dd, (mm > 9 ? "" : "0") + mm, yyyy].join("-");
 };
+
+// Check if value is falsy
+const isFalsy = (val) => {
+  return !val;
+};

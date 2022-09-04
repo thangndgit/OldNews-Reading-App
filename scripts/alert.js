@@ -1,5 +1,5 @@
 // Alert placeholder elements
-const alertPlaceholder = document.getElementById("alertPlaceholder");
+const alertPlaceholder = document.getElementById("alert-placeholder");
 
 // Create bootstrap alert element
 const alert = (msg, type) => {
@@ -11,4 +11,5 @@ const alert = (msg, type) => {
     </div>
     `;
   alertPlaceholder.append(wrapper);
+  document.querySelector("header").scrollIntoView({ behavior: "smooth" });
 };

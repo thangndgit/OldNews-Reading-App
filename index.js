@@ -1,5 +1,6 @@
 // X-RapidAPI-Key and X-RapidAPI-Host
-const apiKey = "da134eb65emshe40e8e13451f1d6p1e9860jsn9ecc557d916f";
+// const apiKey = "da134eb65emshe40e8e13451f1d6p1e9860jsn9ecc557d916f";
+const apiKey = "2c290567f1msh4254a9faad07921p1cb2fdjsndbf361b87660";
 const apiHost = "newscatcher.p.rapidapi.com";
 
 // Fetch options
@@ -12,8 +13,15 @@ const fetchOptions = {
 };
 
 // Option
-const lang = "en";
-const pageSize = 5;
+const keyOption = "key_option";
+const storageOption = getFromStorage(keyOption);
+const defaultOption = {
+  query: "",
+  lang: "en",
+  topic: "news",
+  pageSize: 5,
+};
+const option = storageOption.length == 0 ? defaultOption : storageOption;
 
 // Carousel elements
 const crsIndicators = document.querySelector(
@@ -21,30 +29,39 @@ const crsIndicators = document.querySelector(
 );
 const crsInner = document.querySelector("#carousel-news .carousel-inner");
 
-// News item list
+// HTML element
+const newsTitle = document.querySelector("#news-area .section-title");
 const newsItemList = document.querySelector("#news-area .news-item-list");
+const categoryList = document.querySelector("#category-list ul");
+const languageList = document.querySelector("#language-list ul");
+const loadingOverlay = document.querySelector("#loading-overlay");
 
-// Latest headlines
-const latestHeadlines = [];
+// Latest news
+const latestNews = [];
+const interestNews = [];
 
 // Render carousel
-const renderCarousel = () => {
+const renderCarousel = (newsArr) => {
   // Set latest headlines to carousel
   crsIndicators.innerHTML = `
     <button type="button" data-bs-target="#carousel-news" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     `;
   crsInner.innerHTML = `
-    <div class="carousel-item active" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url('${latestHeadlines[0].media}')">
+    <div class="carousel-item active" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url('${
+      isFalsy(newsArr[0].media) ? "./images/no-image.jpg" : newsArr[0].media
+    }')">
     <div class="carousel-caption">
-    <h5><a href="${latestHeadlines[0].link}" target="_blank" class="link--white">${latestHeadlines[0].title}</a></h5>
+    <h5><a href="${newsArr[0].link}" target="_blank" class="link--white">${
+    newsArr[0].title
+  }</a></h5>
     <p class="mt-4">
-    ${latestHeadlines[0].summary}
+    ${newsArr[0].summary}
     </p>
     </div>
     </div>
     `;
 
-  for (let i = 1; i < 5; i++) {
+  for (let i = 1; i < 10; i++) {
     // Set indicators
     crsIndicators.innerHTML += `
       <button type="button" data-bs-target="#carousel-news" data-bs-slide-to="${i}" aria-label="Slide ${
@@ -53,11 +70,15 @@ const renderCarousel = () => {
       `;
     // Set items
     crsInner.innerHTML += `
-      <div class="carousel-item" target="_blank" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url('${latestHeadlines[i].media}')">
+      <div class="carousel-item" target="_blank" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url('${
+        isFalsy(newsArr[i].media) ? "./images/no-image.jpg" : newsArr[i].media
+      }')">
       <div class="carousel-caption">
-      <h5><a href="${latestHeadlines[i].link}" target="_blank" class="link--white">${latestHeadlines[i].title}</a></h5>
+      <h5><a href="${newsArr[i].link}" target="_blank" class="link--white">${
+      newsArr[i].title
+    }</a></h5>
       <p class="mt-4">
-      ${latestHeadlines[i].summary}
+      ${newsArr[i].summary}
       </p>
       </div>
       </div>
@@ -75,7 +96,11 @@ const renderNews = (newsArr, page, pageSize) => {
     <div class="news-item mt-4">
     <div
     class="news-item__img"
-    style="background: url('${newsArr[firstIndex].media}')"
+    style="background: url('${
+      isFalsy(newsArr[firstIndex].media)
+        ? "./images/no-image.jpg"
+        : newsArr[firstIndex].media
+    }')"
     ></div>
     <ul
     class="news-item__info d-inline-flex text-bg-danger gap-4 p-2"
@@ -105,7 +130,9 @@ const renderNews = (newsArr, page, pageSize) => {
     <div class="news-item mt-5">
     <div
     class="news-item__img"
-    style="background: url('${newsArr[i].media}')"
+    style="background: url('${
+      isFalsy(newsArr[i].media) ? "./images/no-image.jpg" : newsArr[i].media
+    }')"
     ></div>
     <ul
     class="news-item__info d-inline-flex text-bg-danger gap-4 p-2"
@@ -133,29 +160,81 @@ const renderNews = (newsArr, page, pageSize) => {
   }
   // Render news pagination
   renderPagination(page, Math.ceil(newsArr.length / pageSize));
+  // Change title
+  newsTitle.textContent = `Lastest headlines - ${toUpperFirstCase(
+    option.topic
+  )}`;
+  // Scroll in top
+  document
+    .getElementById("news-area-scroll")
+    .scrollIntoView({ behavior: "smooth" });
 };
 
-// Get latest headlines
+// Get latest news and render carousel
 fetch(
-  `https://newscatcher.p.rapidapi.com/v1/latest_headlines?lang=${lang}&media=True`,
+  `https://newscatcher.p.rapidapi.com/v1/latest_headlines?topic=news&lang=${option.lang}&media=True`,
   fetchOptions
 )
   .then((response) => response.json())
   .then((data) => {
-    latestHeadlines.push(...data.articles);
-    renderCarousel();
-    renderNews(latestHeadlines, 1, pageSize);
+    latestNews.push(...data.articles);
+    console.log(latestNews);
+    renderCarousel(latestNews);
   })
   .catch((err) => {
     console.error(err);
     alert(err, "danger");
   });
 
+// Get interest news and render news
+const fetchInterest = () => {
+  loadingOverlay.classList.remove("d-none");
+  fetch(
+    `https://newscatcher.p.rapidapi.com/v1/latest_headlines?topic=${option.topic}&lang=${option.lang}&media=True`,
+    fetchOptions
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      interestNews.length = 0;
+      interestNews.push(...data.articles);
+      console.log(interestNews);
+      renderNews(interestNews, 1, option.pageSize);
+      loadingOverlay.classList.add("d-none");
+    })
+    .catch((err) => {
+      console.error(err);
+      alert(err, "danger");
+    });
+};
+
+fetchInterest();
+
 // Add event listener for pagination
-document.querySelector(".pagination").addEventListener("click", function (e) {
+pagination.addEventListener("click", function (e) {
   e.preventDefault();
   if (!e.target.classList.contains("active") && e.target.textContent != "...") {
-    renderNews(latestHeadlines, +e.target.textContent, pageSize);
-    document.getElementById("news-area").scrollIntoView({ behavior: "smooth" });
+    renderNews(interestNews, +e.target.textContent, option.pageSize);
+  }
+});
+
+// Add event listener for category list
+categoryList.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  if (e.target.tagName == "A") {
+    option.topic = e.target.textContent.toLowerCase();
+    saveToStorage(keyOption, option);
+    fetchInterest();
+  }
+});
+
+// Add event listener for language list
+languageList.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  if (e.target.tagName == "A") {
+    option.lang = e.target.textContent.toLowerCase().slice(-2);
+    saveToStorage(keyOption, option);
+    fetchInterest();
   }
 });
