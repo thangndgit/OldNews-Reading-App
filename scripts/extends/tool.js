@@ -51,3 +51,8 @@ const removeDuplicate = (arr) => {
 
 // Smooth scroll to element
 const scrollToEl = (el) => el.scrollIntoView({ behavior: "smooth" });
+
+// Change page url
+const changePageUrl = (newUrl) =>
+  (window.location.href =
+    window.location.href.split("/").slice(0, -1).join("/") + newUrl);

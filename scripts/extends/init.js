@@ -34,6 +34,5 @@ dropdownCategoryList.addEventListener("click", function (e) {
   settingOption.topic = e.target.getAttribute("code");
   saveToStorage(keySettingOption, settingOption);
   // Move to category page
-  // window.location.href = "/pages/category.html";
-  window.location.replace("/pages/category.html");
+  changePageUrl("/pages/category.html");
 });
