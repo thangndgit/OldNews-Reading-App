@@ -1,19 +1,12 @@
 // HTML element
-const crsIndicators = document.querySelector(
-  "#carousel-news .carousel-indicators"
-);
-const crsItemsList = document.querySelector("#carousel-news .carousel-inner");
 const pagination = document.querySelector("#news-pagination .pagination");
+const newsTitle = document.querySelector("#news-area .section-title");
 const newsScroll = document.getElementById("news-area-scroll");
 const newsList = document.querySelector("#news-area .news-item-list");
 const categoryList = document.querySelector("#category-list ul");
 const languageList = document.querySelector("#language-list ul");
 const loadingOverlay = document.querySelector("#loading-overlay");
 const searchForm = document.querySelector("#search-field form");
-
-// News list
-const interestNews = [];
-const latestNews = [];
 
 // Page state
 const pageState = { page: 1 };
@@ -24,21 +17,14 @@ const getInterestUrl = () =>
     settingOption
   )}&page=${pageState.page}`;
 
-const getLatestUrl = () =>
-  `https://api.newscatcherapi.com/v2/latest_headlines?lang=${settingOption.lang}&page_size=10&page=1`;
-
+// Get interest news handler
 const getInterestNewsHandler = (data) => {
   // News arr
   const newsArr = removeDuplicate(data.articles || []);
-  // Total page
-  const totalPage = Math.min(
-    data.total_pages,
-    Math.ceil(100 / settingOption.page_size)
-  );
   // Render news
   renderNews(newsArr, "", newsList);
   // Render news pagination
-  renderPagination(pageState.page, totalPage, pagination);
+  renderPagination(pageState.page, data.total_pages, pagination);
   // Set active
   const activeCategory = categoryList.querySelector(
     `[code="${settingOption.topic}"]`
@@ -50,18 +36,14 @@ const getInterestNewsHandler = (data) => {
     activeCategory.classList.add("active");
   if (!activeLanguage.classList.contains("active"))
     activeLanguage.classList.add("active");
+  // Change title
+  newsTitle.textContent = `All headlines - ${toUpperFirstCase(
+    settingOption.topic
+  )}`;
   // Scroll in top
   scrollToEl(newsScroll);
   // Hide overlay
   loadingOverlay.classList.add("d-none");
-};
-
-// Get news handler
-const getLatestNewsHandler = (data) => {
-  // News arr
-  const newsArr = removeDuplicate(data.articles || []);
-  // Render carousel
-  renderCarousel(newsArr, crsIndicators, crsItemsList);
 };
 
 // Fetch news
@@ -71,17 +53,12 @@ const fetchInterest = () => {
   fetchNews(getInterestUrl(), 0, getInterestNewsHandler);
 };
 
-const fetchLatest = () => {
-  fetchNews(getLatestUrl(), 1, getLatestNewsHandler);
-};
-
 // Fetch
 fetchInterest();
-fetchLatest();
 clearObj(storageSearchOption);
 
 // Item to element
-const itemToEl = (item, index) =>
+const itemToEl = (item) =>
   `<li><a href="#" code=${item.code}>${item.name}</a></li>`;
 
 // Render category list
@@ -153,5 +130,5 @@ searchForm.addEventListener("submit", function (e) {
   }
   // Set search option
   saveToStorage(keySearchOption, { q: searchVal });
-  window.location.href = "./pages/search.html";
+  window.location.href = "../pages/search.html";
 });

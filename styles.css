@@ -20,6 +20,10 @@ div[class^="container"] {
   max-width: 1120px;
 }
 
+button {
+  border-radius: 0 !important;
+}
+
 /* Link */
 a.link--black {
   color: #000 !important;
@@ -35,6 +39,38 @@ a.link--white {
 
 a.link--white:hover {
   color: #ddd !important;
+}
+
+/* Scroll bar */
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #fff;
+  border-radius: 0 5px 5px 0;
+}
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Navbar */
+.dropdown-menu {
+  height: 240px;
+  overflow: auto;
+}
+
+.dropdown-item:active {
+  background-color: #dc3545 !important;
 }
 
 /* Loading overlay */
@@ -60,9 +96,32 @@ a.link--white:hover {
 }
 
 /* From control */
-.form-control:focus {
+.form-control,
+.form-select {
+  border-radius: 0 !important;
+}
+
+.form-control:focus,
+.form-select:focus {
   border-color: #ba1323 !important;
   box-shadow: 0 0 0 0.25rem rgb(186 19 35 / 25%) !important;
+}
+
+/* Search box */
+#search-box {
+  color: #fff;
+}
+
+#search-box .btn {
+  color: #fff;
+  border: 1px solid #fff;
+  width: 100%;
+}
+
+#search-box .btn:hover {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #000;
 }
 
 /* News carousel */
@@ -94,6 +153,7 @@ a.link--white:hover {
   display: inline-block;
   line-height: 1.5;
   border-bottom: 5px solid #dc3545;
+  margin-bottom: 1.5rem;
 }
 
 /* News item */
@@ -141,16 +201,40 @@ a.link--white:hover {
 }
 
 /* Sidebar */
-#category-list a,
-#language-list a {
-  color: #fff !important;
-  padding: 0.5rem;
-  display: inline-block;
-  border: 1px solid #fff;
+.list-box {
+  padding: 1.5rem;
+  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-#category-list a:hover,
-#language-list a:hover {
-  color: #ddd !important;
-  border: 1px solid #ddd;
+.list-box li {
+  flex-grow: 1;
+}
+
+.list-box a {
+  color: #fff;
+  border: 1px solid #fff;
+  background-color: #dc3545;
+  width: 100%;
+  padding: 0.5rem;
+  text-align: center;
+  display: inline-block;
+}
+
+.list-box a:hover {
+  color: #fff;
+  border: 1px solid #fff;
+  background-color: #ba1323;
+}
+
+.list-box a.active {
+  color: #000;
+  border: 1px solid #000;
+  background-color: #fff;
+}
+
+/* Search box */
+#search-box {
+  padding: 1.5rem;
 }

@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>OldNews</title>
+    <title>Category</title>
 
-    <link rel="shortcut icon" type="image/png" href="./favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="../favicon.png" />
 
     <!-- Styles -->
-    <link href="./styles.css" rel="stylesheet" />
+    <link href="../styles.css" rel="stylesheet" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -31,7 +31,7 @@
       <!-- Nav start -->
       <nav class="navbar navbar-expand-md bg-light shadow text-uppercase">
         <div class="container-lg">
-          <a href="#" class="navbar-brand fw-bold">
+          <a href="../index.html" class="navbar-brand fw-bold">
             <span class="text-secondary">Old</span
             ><span class="text-danger">News</span>
           </a>
@@ -52,14 +52,14 @@
           >
             <ul class="navbar-nav">
               <li class="nav-item ms-2 mb-2 mb-md-0">
-                <a href="#" class="nav-link active"
+                <a href="../index.html" class="nav-link"
                   ><i class="fa fa-home"></i> Home</a
                 >
               </li>
               <li class="nav-item dropdown ms-2 mb-2 mb-md-0">
                 <a
                   href="#"
-                  class="nav-link dropdown-toggle"
+                  class="nav-link dropdown-toggle active"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -68,12 +68,12 @@
                 <ul class="dropdown-menu" id="dropdown-category"></ul>
               </li>
               <li class="nav-item ms-2 mb-2 mb-md-0">
-                <a href="./pages/search.html" class="nav-link"
+                <a href="./search.html" class="nav-link"
                   ><i class="fa fa-search"></i> Advanced search</a
                 >
               </li>
               <li class="nav-item ms-2 mb-2 mb-md-0">
-                <a href="./pages/setting.html" class="nav-link"
+                <a href="./setting.html" class="nav-link"
                   ><i class="fa fa-gear"></i> Setting</a
                 >
               </li>
@@ -110,71 +110,18 @@
       </div>
     </div>
 
+    <div id="news-area-scroll"></div>
+
     <!-- Main tag start -->
     <main class="site-main">
-      <!-- Carousel section start -->
-      <section>
-        <div class="container">
-          <div id="alert-placeholder"></div>
-          <div
-            id="carousel-news"
-            class="carousel slide mt-2"
-            data-bs-ride="carousel"
-          >
-            <div class="carousel-indicators">
-              <button
-                type="button"
-                data-bs-target="#carousel-news"
-                data-bs-slide-to="0"
-                class="active"
-                aria-current="true"
-                aria-label="Slide 1"
-              ></button>
-            </div>
-            <div class="carousel-inner">
-              <div
-                class="carousel-item active"
-                style="background-position: center !important"
-              ></div>
-            </div>
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#carousel-news"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#carousel-news"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-        </div>
-        <!-- Carousel section end -->
-      </section>
-
-      <div id="news-area-scroll"></div>
-
       <!-- News section start -->
       <section class="mt-5">
         <div class="container">
+          <div id="alert-placeholder"></div>
           <div class="row">
             <!-- Main news area start -->
             <div class="col-md-8" id="news-area">
-              <h3 class="section-title">Latest headlines</h3>
+              <h3 class="section-title">Loading . . .</h3>
               <div class="news-item-list"></div>
               <nav id="news-pagination" class="mt-5">
                 <ul class="pagination justify-content-center"></ul>
@@ -235,22 +182,22 @@
               <h4 class="mb-3">Navigation</h4>
               <ul class="ps-3">
                 <li class="mt-2">
-                  <a href="#" class="link--white"
+                  <a href="../index.html" class="link--white"
                     ><i class="fa fa-home"></i> Home</a
                   >
                 </li>
                 <li class="mt-2">
-                  <a href="./pages/category.html" class="link--white"
+                  <a href="./category.html" class="link--white"
                     ><i class="fa fa-list"></i> Category</a
                   >
                 </li>
                 <li class="mt-2">
-                  <a href="./pages/search.html" class="link--white"
+                  <a href="./search.html" class="link--white"
                     ><i class="fa fa-search"></i> Search</a
                   >
                 </li>
                 <li class="mt-2">
-                  <a href="./pages/setting.html" class="link--white"
+                  <a href="./setting.html" class="link--white"
                     ><i class="fa fa-gear"></i> Setting</a
                   >
                 </li>
@@ -283,14 +230,14 @@
     </footer>
 
     <!-- Script -->
-    <script src="./scripts/extends/tool.js"></script>
-    <script src="./scripts/extends/data.js"></script>
-    <script src="./scripts/extends/alert.js"></script>
-    <script src="./scripts/extends/storage.js"></script>
-    <script src="./scripts/extends/fetch.js"></script>
-    <script src="./scripts/extends/render.js"></script>
-    <script src="./scripts/extends/init.js"></script>
-    <script src="./index.js"></script>
+    <script src="../scripts/extends/tool.js"></script>
+    <script src="../scripts/extends/data.js"></script>
+    <script src="../scripts/extends/alert.js"></script>
+    <script src="../scripts/extends/storage.js"></script>
+    <script src="../scripts/extends/fetch.js"></script>
+    <script src="../scripts/extends/render.js"></script>
+    <script src="../scripts/extends/init.js"></script>
+    <script src="../scripts//category.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"

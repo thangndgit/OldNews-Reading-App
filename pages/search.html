@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>OldNews</title>
+    <title>Search</title>
 
-    <link rel="shortcut icon" type="image/png" href="./favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="../favicon.png" />
 
     <!-- Styles -->
-    <link href="./styles.css" rel="stylesheet" />
+    <link href="../styles.css" rel="stylesheet" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -31,7 +31,7 @@
       <!-- Nav start -->
       <nav class="navbar navbar-expand-md bg-light shadow text-uppercase">
         <div class="container-lg">
-          <a href="#" class="navbar-brand fw-bold">
+          <a href="../index.html" class="navbar-brand fw-bold">
             <span class="text-secondary">Old</span
             ><span class="text-danger">News</span>
           </a>
@@ -52,14 +52,14 @@
           >
             <ul class="navbar-nav">
               <li class="nav-item ms-2 mb-2 mb-md-0">
-                <a href="#" class="nav-link active"
+                <a href="../index.html" class="nav-link"
                   ><i class="fa fa-home"></i> Home</a
                 >
               </li>
               <li class="nav-item dropdown ms-2 mb-2 mb-md-0">
                 <a
                   href="#"
-                  class="nav-link dropdown-toggle"
+                  class="nav-link dropdown-toggle active"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -68,12 +68,12 @@
                 <ul class="dropdown-menu" id="dropdown-category"></ul>
               </li>
               <li class="nav-item ms-2 mb-2 mb-md-0">
-                <a href="./pages/search.html" class="nav-link"
+                <a href="./search.html" class="nav-link"
                   ><i class="fa fa-search"></i> Advanced search</a
                 >
               </li>
               <li class="nav-item ms-2 mb-2 mb-md-0">
-                <a href="./pages/setting.html" class="nav-link"
+                <a href="./setting.html" class="nav-link"
                   ><i class="fa fa-gear"></i> Setting</a
                 >
               </li>
@@ -104,7 +104,7 @@
       <!-- Header end -->
     </header>
 
-    <div id="loading-overlay" class="d-none">
+    <div id="loading-overlay">
       <div class="spinner-border text-danger" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
@@ -112,58 +112,123 @@
 
     <!-- Main tag start -->
     <main class="site-main">
-      <!-- Carousel section start -->
-      <section>
+      <!-- Search section start -->
+      <section class="mt-5">
         <div class="container">
           <div id="alert-placeholder"></div>
-          <div
-            id="carousel-news"
-            class="carousel slide mt-2"
-            data-bs-ride="carousel"
-          >
-            <div class="carousel-indicators">
-              <button
-                type="button"
-                data-bs-target="#carousel-news"
-                data-bs-slide-to="0"
-                class="active"
-                aria-current="true"
-                aria-label="Slide 1"
-              ></button>
-            </div>
-            <div class="carousel-inner">
-              <div
-                class="carousel-item active"
-                style="background-position: center !important"
-              ></div>
-            </div>
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#carousel-news"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#carousel-news"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Next</span>
-            </button>
+          <h3 class="section-title">Advanced search</h3>
+          <!-- Search box start -->
+          <div class="bg-danger" id="search-box">
+            <form>
+              <div class="row g-3">
+                <div class="col-sm-6 col-md-4" id="input-q">
+                  <h4>Keyword</h4>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Enter the keyword . . ."
+                  />
+                </div>
+                <div class="col-sm-6 col-md-4" id="input-search-in">
+                  <h4>Search in</h4>
+                  <select class="form-select">
+                    <option value="" selected>Title and summary</option>
+                    <option value="title">Title</option>
+                    <option value="summary">Summary</option>
+                  </select>
+                </div>
+                <div class="col-sm-6 col-md-4" id="input-category">
+                  <h4>Category</h4>
+                  <select class="form-select">
+                    <option value="" selected>All categories</option>
+                  </select>
+                </div>
+                <div class="col-sm-6 col-md-4" id="input-source">
+                  <h4>Source</h4>
+                  <input
+                    class="form-control"
+                    type="text"
+                    list="sourceList"
+                    placeholder="Enter the source . . ."
+                  />
+                  <datalist id="sourceList"> </datalist>
+                </div>
+                <div class="col-sm-6 col-md-4" id="input-language">
+                  <h4>Language</h4>
+                  <select class="form-select">
+                    <option value="" selected>All languages</option>
+                  </select>
+                </div>
+                <div class="col-sm-6 col-md-4" id="input-country">
+                  <h4>Country</h4>
+                  <select class="form-select">
+                    <option value="" selected>All countries</option>
+                  </select>
+                </div>
+                <div class="col-sm-6 col-md-4" id="input-ranked-only">
+                  <h4>Ranked only</h4>
+                  <select class="form-select">
+                    <option value="" selected>Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </div>
+                <div class="col-sm-6 col-md-4" id="input-from-rank">
+                  <h4>From rank</h4>
+                  <input
+                    class="form-control"
+                    type="number"
+                    value="1"
+                    min="1"
+                    step="1"
+                    max="999999"
+                    placeholder="Lowest rank of the news website"
+                  />
+                </div>
+                <div class="col-sm-6 col-md-4" id="input-to-rank">
+                  <h4>To rank</h4>
+                  <input
+                    class="form-control"
+                    type="number"
+                    value="999999"
+                    min="1"
+                    step="1"
+                    max="999999"
+                    placeholder="Highest rank of the news website"
+                  />
+                </div>
+                <div class="col-sm-6 col-md-4" id="input-sort-by">
+                  <h4>Sort by</h4>
+                  <select class="form-select">
+                    <option value="" selected>Relevancy</option>
+                    <option value="date">Date</option>
+                    <option value="rank">Rank</option>
+                  </select>
+                </div>
+                <div class="col-sm-6 col-md-4" id="input-from-date">
+                  <h4>From date</h4>
+                  <input
+                    class="form-control"
+                    type="date"
+                    placeholder="Lowest rank of the news website"
+                  />
+                </div>
+                <div class="col-sm-6 col-md-4" id="input-to-date">
+                  <h4>To date</h4>
+                  <input
+                    class="form-control"
+                    type="date"
+                    placeholder="Highest rank of the news website"
+                  />
+                </div>
+                <div class="col-12 mt-5">
+                  <button type="submit" class="btn">Search</button>
+                </div>
+              </div>
+            </form>
+            <!-- Search box end -->
           </div>
         </div>
-        <!-- Carousel section end -->
+        <!-- Search section end -->
       </section>
 
       <div id="news-area-scroll"></div>
@@ -171,46 +236,14 @@
       <!-- News section start -->
       <section class="mt-5">
         <div class="container">
-          <div class="row">
-            <!-- Main news area start -->
-            <div class="col-md-8" id="news-area">
-              <h3 class="section-title">Latest headlines</h3>
-              <div class="news-item-list"></div>
-              <nav id="news-pagination" class="mt-5">
-                <ul class="pagination justify-content-center"></ul>
-              </nav>
-              <!-- Main news area end -->
-            </div>
-            <!-- Sidebar news area start -->
-            <div class="col-md-4" id="sidebar-area">
-              <!-- Search news start -->
-              <div id="search-field" class="mt-5 mt-md-0">
-                <h3 class="section-title">Search</h3>
-                <form class="d-flex" role="search">
-                  <input
-                    class="form-control me-2"
-                    type="search"
-                    placeholder="Enter the keywords . . ."
-                    aria-label="Search"
-                  />
-                  <button class="btn btn-danger" type="submit">Search</button>
-                </form>
-                <!-- Search field end -->
-              </div>
-              <!-- Category list start -->
-              <div id="category-list" class="mt-5">
-                <h3 class="section-title">Categories</h3>
-                <ul class="list-box bg-danger"></ul>
-                <!-- Category list end -->
-              </div>
-              <!-- Language list start -->
-              <div id="language-list" class="mt-5">
-                <h3 class="section-title">Languages</h3>
-                <ul class="list-box bg-danger"></ul>
-                <!-- Language list end -->
-              </div>
-              <!-- Sidebar news area end -->
-            </div>
+          <!-- Main news area start -->
+          <div id="news-area">
+            <h3 class="section-title"></h3>
+            <div class="news-item-list row"></div>
+            <nav id="news-pagination" class="mt-5">
+              <ul class="pagination justify-content-center"></ul>
+            </nav>
+            <!-- Main news area end -->
           </div>
         </div>
         <!-- News section end -->
@@ -235,22 +268,22 @@
               <h4 class="mb-3">Navigation</h4>
               <ul class="ps-3">
                 <li class="mt-2">
-                  <a href="#" class="link--white"
+                  <a href="../index.html" class="link--white"
                     ><i class="fa fa-home"></i> Home</a
                   >
                 </li>
                 <li class="mt-2">
-                  <a href="./pages/category.html" class="link--white"
+                  <a href="./category.html" class="link--white"
                     ><i class="fa fa-list"></i> Category</a
                   >
                 </li>
                 <li class="mt-2">
-                  <a href="./pages/search.html" class="link--white"
+                  <a href="./search.html" class="link--white"
                     ><i class="fa fa-search"></i> Search</a
                   >
                 </li>
                 <li class="mt-2">
-                  <a href="./pages/setting.html" class="link--white"
+                  <a href="./setting.html" class="link--white"
                     ><i class="fa fa-gear"></i> Setting</a
                   >
                 </li>
@@ -283,14 +316,15 @@
     </footer>
 
     <!-- Script -->
-    <script src="./scripts/extends/tool.js"></script>
-    <script src="./scripts/extends/data.js"></script>
-    <script src="./scripts/extends/alert.js"></script>
-    <script src="./scripts/extends/storage.js"></script>
-    <script src="./scripts/extends/fetch.js"></script>
-    <script src="./scripts/extends/render.js"></script>
-    <script src="./scripts/extends/init.js"></script>
-    <script src="./index.js"></script>
+    <script src="../scripts/extends/tool.js"></script>
+    <script src="../scripts/extends/data.js"></script>
+    <script src="../scripts/extends/alert.js"></script>
+    <script src="../scripts/extends/storage.js"></script>
+    <script src="../scripts/extends/fetch.js"></script>
+    <script src="../scripts/extends/render.js"></script>
+    <script src="../scripts/extends/init.js"></script>
+    <script src="../scripts/search.js"></script>
+    <script src="../scripts/extends/site.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
