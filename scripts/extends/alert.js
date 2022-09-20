@@ -11,5 +11,5 @@ const alert = (msg, type) => {
     </div>
     `;
   alertPlaceholder.append(wrapper);
-  document.querySelector("header").scrollIntoView({ behavior: "smooth" });
+  alertPlaceholder.scrollIntoView({ behavior: "smooth" });
 };

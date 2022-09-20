@@ -55,4 +55,14 @@ const scrollToEl = (el) => el.scrollIntoView({ behavior: "smooth" });
 // Change page url
 const changePageUrl = (newUrl) =>
   (window.location.href =
-    window.location.href.split("/").slice(0, -1).join("/") + newUrl);
+    window.location.href.split("/").slice(0, 3).join("/") + newUrl);
+
+// Array to chunks
+const arrToChunks = (arr, size) => {
+  const res = [];
+  for (let i = 0; i < arr.length; i += size) {
+    const chunk = arr.slice(i, i + size);
+    res.push(chunk);
+  }
+  return res;
+};

@@ -7,9 +7,12 @@ const categoryList = document.querySelector("#category-list ul");
 const languageList = document.querySelector("#language-list ul");
 const loadingOverlay = document.querySelector("#loading-overlay");
 const searchForm = document.querySelector("#search-field form");
+const confirmBtn = document.querySelector("#confirm-modal .btn-confirm-modal");
 
-// Page state
+// States
 const pageState = { page: 1 };
+const newsState = {};
+const addState = {};
 
 // Get fetch url
 const getInterestUrl = () =>
@@ -20,9 +23,10 @@ const getInterestUrl = () =>
 // Get interest news handler
 const getInterestNewsHandler = (data) => {
   // News arr
-  const newsArr = removeDuplicate(data.articles || []);
+  const newsArr = data.articles || [];
+  newsState.news = newsArr;
   // Render news
-  renderNews(newsArr, "", newsList);
+  renderNews(newsArr, "", "Add to favorite", newsList);
   // Render news pagination
   renderPagination(pageState.page, data.total_pages, pagination);
   // Set active
@@ -131,4 +135,19 @@ searchForm.addEventListener("submit", function (e) {
   // Set search option
   saveToStorage(keySearchOption, { q: searchVal });
   window.location.href = "../pages/search.html";
+});
+
+// Add event listener for news list
+newsList.addEventListener("click", function (e) {
+  // Check
+  if (!e.target.classList.contains("news-item__add-btn")) return;
+  e.preventDefault();
+  addState.add = newsState.news[+e.target.getAttribute("news-id")];
+});
+
+// Add event listener for confirm modal button
+confirmBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  favoriteNews.unshift(addState.add);
+  saveToStorage(keyFavoriteNews, favoriteNews);
 });

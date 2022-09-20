@@ -4,6 +4,7 @@ const newsTitle = document.querySelector("#news-area .section-title");
 const newsScroll = document.getElementById("news-area-scroll");
 const newsList = document.querySelector("#news-area .news-item-list");
 const loadingOverlay = document.querySelector("#loading-overlay");
+const confirmBtn = document.querySelector("#confirm-modal .btn-confirm-modal");
 
 // Input element
 const searchForm = document.querySelector("#search-box form");
@@ -24,8 +25,10 @@ const inputToDate = document.querySelector("#input-to-date input");
 // Search option
 const searchOption = {};
 
-// Page state
+// States
 const pageState = { page: 1 };
+const newsState = {};
+const addState = {};
 
 // Render input select option
 const itemToOptionEl = (item) =>
@@ -44,15 +47,15 @@ inputToDate.value = formatDate(new Date(), yyyymmdd, "-");
 const getInterestUrl = () =>
   `https://api.newscatcherapi.com/v2/search?${paramsToStr(
     searchOption
-  )}&page_size=${settingOption.page_size}&page=${pageState.page}`;
+  )}&page_size=12&page=${pageState.page}`;
 
 // Get interest news handler
 const getInterestNewsHandler = (data) => {
   // News arr
-  // const newsArr = removeDuplicate(data.articles || []);
   const newsArr = data.articles || [];
+  newsState.news = newsArr;
   // Render news
-  renderNews(newsArr, "col-md-6", newsList);
+  renderNews(newsArr, "col-md-6", "Add to favorite", newsList);
   // Render news pagination
   renderPagination(pageState.page, data.total_pages, pagination);
   // Change title
@@ -137,3 +140,18 @@ if (storageSearchOption.length != 0) {
   removeFromStorage(keySearchOption);
   fetchInterest();
 }
+
+// Add event listener for news list
+newsList.addEventListener("click", function (e) {
+  // Check
+  if (!e.target.classList.contains("news-item__add-btn")) return;
+  e.preventDefault();
+  addState.add = newsState.news[+e.target.getAttribute("news-id")];
+});
+
+// Add event listener for confirm modal button
+confirmBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  favoriteNews.unshift(addState.add);
+  saveToStorage(keyFavoriteNews, favoriteNews);
+});

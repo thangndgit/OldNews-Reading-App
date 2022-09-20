@@ -75,8 +75,8 @@
                 >
               </li>
               <li class="nav-item ms-2 mb-2 mb-md-0">
-                <a href="./pages/setting.html" class="nav-link"
-                  ><i class="fa fa-gear"></i> Setting</a
+                <a href="./pages/favorite.html" class="nav-link"
+                  ><i class="fa fa-bookmark"></i> Favorite</a
                 >
               </li>
             </ul>
@@ -106,7 +106,7 @@
       <!-- Header end -->
     </header>
 
-    <div id="loading-overlay" class="d-none">
+    <div id="loading-overlay">
       <div class="spinner-border text-danger" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
@@ -252,8 +252,8 @@
                   >
                 </li>
                 <li class="mt-2">
-                  <a href="./pages/setting.html" class="link--white"
-                    ><i class="fa fa-gear"></i> Setting</a
+                  <a href="./pages/favorite.html" class="link--white"
+                    ><i class="fa fa-bookmark"></i> Favorite</a
                   >
                 </li>
               </ul>
@@ -283,6 +283,53 @@
       </div>
       <!-- Footer end -->
     </footer>
+
+    <!-- Confirm modal -->
+    <div class="modal fade" id="confirm-modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirm</h5>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to add this news to your favorites?
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-danger" data-bs-dismiss="modal">
+              Cancel
+            </button>
+            <button
+              class="btn btn-danger btn-confirm-modal"
+              data-bs-target="#success-modal"
+              data-bs-toggle="modal"
+            >
+              Add to favorite
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success modal -->
+    <div class="modal fade" id="success-modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Success</h5>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            You have successfully added this news to your favorites!
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger" data-bs-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Script -->
     <script src="./scripts/extends/tool.js"></script>

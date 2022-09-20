@@ -10,13 +10,12 @@ const categoryList = document.querySelector("#category-list ul");
 const languageList = document.querySelector("#language-list ul");
 const loadingOverlay = document.querySelector("#loading-overlay");
 const searchForm = document.querySelector("#search-field form");
+const confirmBtn = document.querySelector("#confirm-modal .btn-confirm-modal");
 
-// News list
-const interestNews = [];
-const latestNews = [];
-
-// Page state
+// States
 const pageState = { page: 1 };
+const newsState = {};
+const addState = {};
 
 // Get fetch url
 const getInterestUrl = () =>
@@ -25,18 +24,19 @@ const getInterestUrl = () =>
   )}&page=${pageState.page}`;
 
 const getLatestUrl = () =>
-  `https://api.newscatcherapi.com/v2/latest_headlines?lang=${settingOption.lang}&page_size=10&page=1`;
+  `https://api.newscatcherapi.com/v2/latest_headlines?lang=${settingOption.lang}&page_size=100&page=1`;
 
 const getInterestNewsHandler = (data) => {
   // News arr
   const newsArr = removeDuplicate(data.articles || []);
+  newsState.news = newsArr;
   // Total page
   const totalPage = Math.min(
     data.total_pages,
     Math.ceil(100 / settingOption.page_size)
   );
   // Render news
-  renderNews(newsArr, "", newsList);
+  renderNews(newsArr, "", "Add to favorite", newsList);
   // Render news pagination
   renderPagination(pageState.page, totalPage, pagination);
   // Set active
@@ -59,7 +59,7 @@ const getInterestNewsHandler = (data) => {
 // Get news handler
 const getLatestNewsHandler = (data) => {
   // News arr
-  const newsArr = removeDuplicate(data.articles || []);
+  const newsArr = removeDuplicate(data.articles || []).slice(0, 2);
   // Render carousel
   renderCarousel(newsArr, crsIndicators, crsItemsList);
 };
@@ -154,4 +154,19 @@ searchForm.addEventListener("submit", function (e) {
   // Set search option
   saveToStorage(keySearchOption, { q: searchVal });
   window.location.href = "./pages/search.html";
+});
+
+// Add event listener for news list
+newsList.addEventListener("click", function (e) {
+  // Check
+  if (!e.target.classList.contains("news-item__add-btn")) return;
+  e.preventDefault();
+  addState.add = newsState.news[+e.target.getAttribute("news-id")];
+});
+
+// Add event listener for confirm modal button
+confirmBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  favoriteNews.unshift(addState.add);
+  saveToStorage(keyFavoriteNews, favoriteNews);
 });

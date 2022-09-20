@@ -95,7 +95,7 @@ const renderPagination = (currentPage, totalPage, elPagination) => {
 };
 
 // Render news
-const renderNews = (items, extendClass, elNewsList) => {
+const renderNews = (items, extendClass, btnLbl, elNewsList) => {
   // Render handler
   const itemToEl = (item, index) => `
     <div class="news-item mb-5 ${extendClass}">
@@ -104,7 +104,16 @@ const renderNews = (items, extendClass, elNewsList) => {
         style="background: url('${
           isFalsy(item.media) ? "/images/no-image.jpg" : item.media
         }')"
-      ></div>
+      >
+      <button
+        class="news-item__add-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#confirm-modal"
+        news-id="${index}"
+      >
+        ${btnLbl}
+      </button>
+      </div>
       <ul class="news-item__info d-inline-flex text-bg-danger gap-4 p-2">
         <li>
           <i class="fa-solid fa-earth-america"></i> ${item.clean_url}

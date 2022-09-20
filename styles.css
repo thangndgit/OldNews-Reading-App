@@ -170,6 +170,26 @@ a.link--white:hover {
   background-size: cover !important;
 }
 
+.news-item__add-btn {
+  border: none;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: transparent;
+  background-color: transparent;
+  -webkit-transition: color 500ms, background-color 500ms;
+  -moz-transition: color 500ms, background-color 500ms;
+  -o-transition: color 500ms, background-color 500ms;
+  -ms-transition: color 500ms, background-color 500ms;
+  transition: color 500ms, background-color 500ms;
+}
+
+.news-item__add-btn:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .news-item__info {
   position: absolute;
   transform: translateY(-100%);
