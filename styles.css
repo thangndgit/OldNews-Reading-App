@@ -107,6 +107,11 @@ a.link--white:hover {
   box-shadow: 0 0 0 0.25rem rgb(186 19 35 / 25%) !important;
 }
 
+/* Site main */
+.site-main {
+  min-height: 45vh;
+}
+
 /* Search box */
 #search-box {
   color: #fff;
